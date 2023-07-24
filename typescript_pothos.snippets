@@ -1,0 +1,9 @@
+snippet objectType "Pulumi Kubernetes Deployment" b
+const ${1:${VISUAL:name}} = builder.objectType(${2:${VISUAL:class_name}}, {
+  name: '${2}',
+  description: '${3}',
+  fields: (t) => ({
+    name: t.exposeString('name', {}),
+  }),
+});
+endsnippet
