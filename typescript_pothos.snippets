@@ -1,9 +1,37 @@
 snippet objectType "Pulumi Kubernetes Deployment" b
 const ${1:${VISUAL:name}} = builder.objectType(${2:${VISUAL:class_name}}, {
-  name: '${2}',
-  description: '${3}',
   fields: (t) => ({
-    name: t.exposeString('name', {}),
+    name: t.exposeString('name'),
+    nested_type: t.field({
+      type: [type_name],
+      resolve: (parent) => parent.source_data_type_name,
+    }),
+  }),
+});
+endsnippet
+
+snippet typeandobjectref "Create Type and Corresponding Pothos objectRef" b
+export type ${1:${VISUAL:name}} = {
+  ${2:${VISUAL:property_1}}: string;
+  ${3:${VISUAL:property_2}}: string;
+  ${4:${VISUAL:property_3}}: string;
+};
+
+export const ${1:${VISUAL:name}}Object = builder.objectRef<${1}>('${1}').implement({
+  fields: (t) => ({
+    ${2}: t.exposeString('${2}'),
+    ${3}: t.exposeString('${3}'),
+    ${4}: t.exposeString('${4}'),
+  }),
+});
+endsnippet
+
+snippet objectRef "Create pothos objectRef" b
+export const ${1:${VISUAL:name}}Object = builder.objectRef<${1}>('${1}').implement({
+  fields: (t) => ({
+    name: t.exposeString('name'),
+    name: t.exposeString('name'),
+    name: t.exposeString('name'),
   }),
 });
 endsnippet
